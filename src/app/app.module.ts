@@ -17,6 +17,8 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     LayoutComponent,
     FooterComponent,
-    SearchbarComponent
+    SearchbarComponent,
+    UserDetailComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

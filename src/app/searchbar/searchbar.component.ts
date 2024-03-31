@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable, startWith, switchMap } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { User } from '../user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-searchbar',
@@ -14,7 +15,7 @@ export class SearchbarComponent implements OnInit{
   filterUsers!: Observable<User[]>
   formControl = new FormControl('');
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
  ngOnInit(): void {
     this.filterUsers = this.formControl.valueChanges.pipe(
@@ -24,8 +25,8 @@ export class SearchbarComponent implements OnInit{
   }
 
 
-  selectOption(optionValue: User): void {
-    this.formControl.setValue(`${optionValue.first_name} ${optionValue.last_name}`);
+ selectUser(userId: number) {
+    this.router.navigate(['/userDetail', userId]);
   }
 
 }
