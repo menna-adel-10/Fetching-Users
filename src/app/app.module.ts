@@ -11,8 +11,12 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { SearchbarComponent } from './searchbar/searchbar.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserService } from './services/user.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,16 +29,20 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     MatButtonModule,
     MatFormFieldModule,
     MatMenuModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
 
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    UserService
   ],
   bootstrap: [AppComponent]
 })

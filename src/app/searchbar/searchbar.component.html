@@ -1,1 +1,10 @@
-<p>searchbar works!</p>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput [matAutocomplete]="auto" [formControl]="formControl" placeholder="Search..." class="search" />
+    <mat-autocomplete autoSelect #auto="matAutocomplete" (optionSelected)="selectOption($event.option.value)">
+      <mat-option *ngFor="let item of filterUsers | async">
+        {{ item.first_name }} {{ item.last_name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
