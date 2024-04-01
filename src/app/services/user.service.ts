@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { User } from '../user';
 
 
@@ -13,12 +13,26 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsersList(searchTerm: string): Observable<User[]> {
-    const url = `${this.apiUrl}?q=${searchTerm}`;
-    return this.http.get<any>(url).pipe(
+   getUsersList(): Observable<User[]> {
+    return this.http.get<any>(this.apiUrl).pipe(
       map(response => response.data as User[])
     );
   }
 
-  
+
+  getData(): Observable<User[]> {
+    return this.http.get<any>(this.apiUrl).pipe(
+      map(response => response.data as User[])
+    );
+  }
+
+getUserDetails(id: string): Observable<User> {
+    return this.http.get(`${this.apiUrl}/${id}`).pipe(
+      map((response: any) => {
+        return response.data as User; 
+      })
+    );
+  }
+
+
 }
