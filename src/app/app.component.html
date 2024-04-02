@@ -1,4 +1,4 @@
-@if(isLoading) {
-<app-spinner></app-spinner>
-}
-<app-layout></app-layout>
+
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+<app-layout *ngIf="!isLoading"></app-layout>

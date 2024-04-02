@@ -10,7 +10,7 @@ export class UserListComponent implements OnInit{
  @Input() searchQuery!: string;
   users: any[] = [];
   currentPage: number = 1;
-  loading: boolean = true;
+  isLoading: boolean = false;
 
   constructor(private userService: UserService) { }
 
@@ -23,11 +23,11 @@ export class UserListComponent implements OnInit{
     this.userService.getUsers(this.currentPage)
       .subscribe(users => {
         this.users = users.data;
-        this.loading = false;
+        this.isLoading = true;
       });
     (error: any) => {
           console.error('Error loading users:', error);
-          this.loading = false;
+          this.isLoading = false;
         }
 
   }

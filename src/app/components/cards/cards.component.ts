@@ -3,6 +3,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../services/user.service';
 import { User } from '../../user';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-cards',
@@ -11,8 +13,8 @@ import { User } from '../../user';
 export class CardsComponent implements OnInit, AfterViewInit {
   @Input() searchQuery!: string;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
 
+  isLoading: boolean = false;
   usersList: User[] = [];
   currentPage: number = 1;
   pageEvent!: PageEvent;
@@ -36,7 +38,8 @@ export class CardsComponent implements OnInit, AfterViewInit {
 
 
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loadUsers();
@@ -53,13 +56,20 @@ export class CardsComponent implements OnInit, AfterViewInit {
         this.usersList = res.data;
         this.dataSource = new MatTableDataSource<User>(this.usersList);
         this.dataSource.paginator = this.paginator;
-       
+
       },
       (error: any) => {
         console.error('Error loading users:', error);
-       
+
       }
     );
+  }
+
+   viewUser(id: number) {
+    this.isLoading = true;
+    this.router.navigate(['/user-details', id]).then(() => {
+      this.isLoading = false; 
+    });
   }
 
   applyFilter(event: Event) {

@@ -8,7 +8,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './user-details.component.html'
 })
 export class UserDetailsComponent implements OnInit {
-   loading: boolean = true;
+   isLoading: boolean = false;
   user: any;
 
   constructor(
@@ -21,13 +21,24 @@ export class UserDetailsComponent implements OnInit {
     this.getUser();
   }
 
-   getUser(): void {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    if (idParam) {
-      const id = +idParam;
-      this.userService.getUser(id)
-        .subscribe(user => this.user = user.data);
-    }
+  getUser(): void {
+   this.isLoading = true;
+
+  const idParam = this.route.snapshot.paramMap.get('id');
+  if (idParam) {
+    const id = +idParam;
+    this.userService.getUser(id)
+      .subscribe(
+        user => {
+          this.user = user.data;
+          this.isLoading = false;
+        },
+        error => {
+          console.error('Error loading user:', error);
+          this.isLoading = false; 
+        }
+      );
+  }
   }
 
   goBack(): void {
