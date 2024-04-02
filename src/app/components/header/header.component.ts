@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
    menuItems = [
     { icon: 'home', text: 'Home', link: '' },
-    { icon: 'shopping_cart', text: 'Market Place', link: '' },
-    { icon: 'notifications', text: 'Notifications', link: '' },
-    { icon: 'person', text: 'Profile', link: '' }
+    { icon: 'shopping_cart', text: 'Market Place', link: '#' },
+    { icon: 'notifications', text: 'Notifications', link: '#' },
+    { icon: 'person', text: 'Profile', link: '#' }
    ];
-  
-  
+
+
 }

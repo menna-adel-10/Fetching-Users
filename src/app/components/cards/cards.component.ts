@@ -39,16 +39,20 @@ export class CardsComponent implements OnInit, AfterViewInit {
 
 
   constructor(private userService: UserService,
-    private router: Router) { }
+    private router: Router) {
+     this.dataSource = new MatTableDataSource<User>();
+     }
 
   ngOnInit(): void {
     this.loadUsers();
 
   }
 
-   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-   }
+  ngAfterViewInit(): void {
+    if (this.dataSource && this.paginator) {
+      this.dataSource.paginator = this.paginator;
+    }
+  }
 
   loadUsers() {
     this.userService.fetchUsers().subscribe(
@@ -68,7 +72,7 @@ export class CardsComponent implements OnInit, AfterViewInit {
    viewUser(id: number) {
     this.isLoading = true;
     this.router.navigate(['/user-details', id]).then(() => {
-      this.isLoading = false; 
+      this.isLoading = false;
     });
   }
 
