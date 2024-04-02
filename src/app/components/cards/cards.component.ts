@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../services/user.service';
@@ -15,6 +15,7 @@ export class CardsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   isLoading: boolean = false;
+   isSmallScreen: boolean = false;
   usersList: User[] = [];
   currentPage: number = 1;
   pageEvent!: PageEvent;
@@ -39,9 +40,14 @@ export class CardsComponent implements OnInit, AfterViewInit {
 
 
   constructor(private userService: UserService,
-    private router: Router) {
+    private router: Router, private renderer: Renderer2) {
      this.dataSource = new MatTableDataSource<User>();
-     }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.isSmallScreen = window.innerWidth <= 768; 
+  }
 
   ngOnInit(): void {
     this.loadUsers();
