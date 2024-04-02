@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserDetailComponent } from './user-detail/user-detail.component';
-import { HomeComponent } from './home/home.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { UserDetailsComponent } from './pages/user-details/user-details.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' }, // Redirect to userList page by default
+  { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '', component: HomeComponent },
-  { path: 'user-detail/:id', component: UserDetailComponent } // Route with parameter for userDetail page
+  { path: 'user-details/:id', component: UserDetailsComponent } 
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

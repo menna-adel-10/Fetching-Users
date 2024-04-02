@@ -1,5 +1,8 @@
-<div class="container min-h-screen m-0 p-0">
+<div class="container min-h-screen justify-center mx-auto">
   <app-header></app-header>
-  <router-outlet class="px-10 py-10"></router-outlet>
+  @if(isLoading) {
+    <app-spinner></app-spinner>
+  }
+  <router-outlet></router-outlet>
   <app-footer></app-footer>
 </div>
