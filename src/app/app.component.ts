@@ -7,25 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'eeducation';
-  @Output() searchQueryChanged = new EventEmitter<string>();
+ isLoading = true;
 
-  searchId!: string;
-  searchQuery!: string;
-
-
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
-  }
-
-  search(query: string): void {
-  console.log('Search query received:', query);
-  this.searchQuery = query;
-}
-
-  onSearchChange(): void {
-    this.searchQueryChanged.emit(this.searchId);
+  constructor() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 3000)
   }
 
 }
